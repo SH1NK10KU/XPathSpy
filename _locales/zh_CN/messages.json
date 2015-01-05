@@ -1,0 +1,8 @@
+{
+    "extensionName": {
+        "message": "XPath间谍"
+    },
+    "extensionDescription": {
+        "message": "在开发者工具中提供方便获取已选取页面元素的XPath。"
+    }
+}
