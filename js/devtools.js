@@ -94,16 +94,16 @@ var getElementInfo = function detectElement() {
         xpath = getNodeInfo(parentElement) + "/" + xpath;
         parentElement = getParentNode(parentElement);
     }
-    data['xpath'] = "//" + xpath;
-    data['top'] = getTop($0);
-    data['left'] = getLeft($0);
-    data['bottom'] = getBottom($0);
-    data['right'] = getRight($0);
+    data["xpath"] = "//" + xpath;
+    data["top"] = getTop($0);
+    data["left"] = getLeft($0);
+    data["bottom"] = getBottom($0);
+    data["right"] = getRight($0);
     return data;
 };
 chrome.devtools.panels.elements.createSidebarPane("XPath Spy", function(sidebar) {
     var onSelectionChanged = function() {
-        sidebar.setExpression('(' + getElementInfo.toString() + ')()', "Element");
+        sidebar.setExpression("(" + getElementInfo.toString() + ")()", "Element");
     };
     onSelectionChanged();
     chrome.devtools.panels.elements.onSelectionChanged.addListener(onSelectionChanged);
