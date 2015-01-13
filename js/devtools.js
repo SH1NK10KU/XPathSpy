@@ -83,7 +83,7 @@ var getElementInfo = function selectedElement() {
     
     // Get the xpath of the element with id.
     function getElementXpathWithId(e) {
-        return "//" + e.tagName + "[@id='" + e.id + "']";
+        return formatWithHTML("//" + e.tagName + "[@id='" + e.id + "']");
     }
     
     // Get the xpath of the element.
@@ -102,9 +102,13 @@ var getElementInfo = function selectedElement() {
             xpath = getElementXpath(parentElement, isFull) + "/" + xpath;
             parentElement = parentElement.parentNode;
         }
-        return xpath;
+        return formatWithHTML(xpath);
     }
     
+    function formatWithHTML(str) {
+        return str.replace(/^((\/){0,2}HTML)/, "/HTML");
+    }
+
     // Get the top pixel of the element.
     function getTop(e) {
         var offset = e.offsetTop;
@@ -131,6 +135,8 @@ var getElementInfo = function selectedElement() {
         return getLeft(e) + e.offsetWidth;
     }
     
+    // 
+
     // Create data object.
     var data = Object.create(null);
     if ($0.nodeType === 1) {
