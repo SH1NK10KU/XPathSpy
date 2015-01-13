@@ -105,6 +105,7 @@ var getElementInfo = function selectedElement() {
         return formatWithHTML(xpath);
     }
     
+    // Format the XPath with node, "HTML"
     function formatWithHTML(str) {
         return str.replace(/^((\/){0,2}HTML)/, "/HTML");
     }
@@ -135,8 +136,6 @@ var getElementInfo = function selectedElement() {
         return getLeft(e) + e.offsetWidth;
     }
     
-    // 
-
     // Create data object.
     var data = Object.create(null);
     if ($0.nodeType === 1) {
