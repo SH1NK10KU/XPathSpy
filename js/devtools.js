@@ -140,8 +140,8 @@ var getElementInfo = function selectedElement() {
     // Create data object.
     var data = Object.create(null);
     if ($0.nodeType === 1) {
-        data["short xpath"] = getXpath($0, false);
-        data["full xpath"] = getXpath($0, true);
+        data["xpath(Short)"] = getXpath($0, false);
+        data["xpath(Full)"] = getXpath($0, true);
         data["top"] = getTop($0);
         data["left"] = getLeft($0);
         data["bottom"] = getBottom($0);
