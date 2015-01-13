@@ -1,110 +1,156 @@
-/**************************************************************
- *
- *    XPath Spy 1.0
- *
- *    Copyright (c) 2014, Shin Feng. All rights reserved.
- *
- **************************************************************/
-var getElementInfo = function detectElement() {
-    function getTagName(e) {
-        return e.tagName;
-    }
-
-    function getId(e) {
-        return e.id;
-    }
-
-    function getName(e) {
-        return e.name;
-    }
-
-    function getClassName(e) {
-        return e.className;
-    }
-
-    function getType(e) {
-        return e.type;
-    }
-
-    function getValue(e) {
-        return e.value;
-    }
-
-    function getNodeInfo(e) {
-        var nodeInfo = getTagName(e);
-        var attrsArray = new Array();
-        var attrs = ["@id=", "@name=", "@class=", "@type="]
-        var values = [getId(e), getName(e), getClassName(e),
-            getType(e), getValue(e)
-        ];
-        for (var index = attrs.length - 1; index >= 0; index--) {
-            if (typeof values[index] !== "undefined" && values[index] !== "") {
-                attrsArray.push(attrs[index] + "'" + values[index] + "'");
+/*******************************************************************************
+ * 
+ * XPath Spy 1.0
+ * 
+ * Copyright (c) 2014, Shin Feng. All rights reserved.
+ * 
+ ******************************************************************************/
+var getElementInfo = function selectedElement() {
+    // Get sibling information.
+    function getSibling(e, isFull) {
+        var sibling = {
+            num : 0,
+            index : 1
+        };
+        var preSiblingNum = 0;
+        var nextSiblingNum = 0;
+        var previousSiblingElement = e.previousSibling;
+        var nextSiblingElement = e.nextSibling;
+        
+        if (isFull) {
+            while (previousSiblingElement != null) {
+                if (previousSiblingElement.tagName === e.tagName
+                        && previousSiblingElement.name === e.name
+                        && previousSiblingElement.className === e.className
+                        && previousSiblingElement.type === e.type) {
+                    preSiblingNum += 1;
+                }
+                previousSiblingElement = previousSiblingElement.previousSibling;
+            }
+            while (nextSiblingElement != null) {
+                if (nextSiblingElement.tagName === e.tagName
+                        && nextSiblingElement.name === e.name
+                        && nextSiblingElement.className === e.className
+                        && nextSiblingElement.type === e.type) {
+                    nextSiblingNum += 1;
+                }
+                nextSiblingElement = nextSiblingElement.nextSibling;
+            }
+        } else {
+            while (previousSiblingElement != null) {
+                if (previousSiblingElement.tagName === e.tagName) {
+                    preSiblingNum += 1;
+                }
+                previousSiblingElement = previousSiblingElement.previousSibling;
+            }
+            while (nextSiblingElement != null) {
+                if (nextSiblingElement.tagName === e.tagName) {
+                    nextSiblingNum += 1;
+                }
+                nextSiblingElement = nextSiblingElement.nextSibling;
             }
         }
-        if (attrsArray.length > 0) {
-            nodeInfo += "[" + attrsArray.join(" and ") + "]";
+        sibling["num"] = preSiblingNum + nextSiblingNum;
+        sibling["index"] += preSiblingNum;
+        return sibling;
+    }
+    
+    // Get the xpath of the element.
+    function getElementXpath(e, isFull) {
+        var nodeInfo = e.tagName;
+        var sibling = getSibling(e, isFull);
+        if (isFull) {
+            var attrsArray = new Array();
+            var attrs = [ "@value=", "@type=", "@class=", "@name=", "@id=" ];
+            var values = [ e.value, e.type, e.className, e.name, e.id ];
+            for (var index = attrs.length - 1; index >= 0; index--) {
+                if (typeof values[index] !== "undefined"
+                        && values[index] !== "") {
+                    attrsArray.push(attrs[index] + "'" + values[index] + "'");
+                }
+            }
+            if (attrsArray.length > 0) {
+                nodeInfo += "[" + attrsArray.join(" and ") + "]";
+            }
         }
-        if (getPreviousSibling(e) > 1) {
-            nodeInfo += "[" + getPreviousSibling(e) + "]";
+        if (sibling["num"] > 0) {
+            nodeInfo += "[" + sibling["index"] + "]";
         }
         return nodeInfo;
     }
-
-    function getParentNode(e) {
-        return e.parentNode;
+    
+    // Get the xpath of the element with id.
+    function getElementXpathWithId(e) {
+        return "//" + e.tagName + "[@id='" + e.id + "']";
     }
-
-    function getPreviousSibling(e) {
-        var pre = 1;
-        var previousNode = e.previousSibling;
-        while (previousNode != null) {
-            if (previousNode.id === e.id && previousNode.tagName === e.tagName && previousNode.className === e.className && previousNode.type === e.type) {
-                pre += 1;
+    
+    // Get the xpath of the element.
+    function getXpath(e, isFull) {
+        var xpath = getElementXpath(e, isFull);
+        var parentElement = e.parentNode;
+        while (parentElement.tagName) {
+            if (!isFull) {
+                if (e.id !== "") {
+                    return getElementXpathWithId(e);
+                }
+                if (parentElement.id !== "") {
+                    return getElementXpathWithId(parentElement) + "/" + xpath;
+                }
             }
-            previousNode = previousNode.previousSibling;
+            xpath = getElementXpath(parentElement, isFull) + "/" + xpath;
+            parentElement = parentElement.parentNode;
         }
-        return pre;
+        return xpath;
     }
-
+    
+    // Get the top pixel of the element.
     function getTop(e) {
         var offset = e.offsetTop;
-        if (e.offsetParent != null) offset += getTop(e.offsetParent);
+        if (e.offsetParent != null)
+            offset += getTop(e.offsetParent);
         return offset;
     }
-
+    
+    // Get the left pixel of the element.
     function getLeft(e) {
         var offset = e.offsetLeft;
-        if (e.offsetParent != null) offset += getLeft(e.offsetParent);
+        if (e.offsetParent != null)
+            offset += getLeft(e.offsetParent);
         return offset;
     }
-
+    
+    // Get the bottom pixel of the element.
     function getBottom(e) {
         return getTop(e) + e.offsetHeight;
     }
-
+    
+    // Get the right pixel of the element.
     function getRight(e) {
         return getLeft(e) + e.offsetWidth;
     }
-    var node = $0;
+    
+    // Create data object.
     var data = Object.create(null);
-    var parentElement = getParentNode($0);
-    var xpath = getNodeInfo($0);
-    while (parentElement.tagName) {
-        xpath = getNodeInfo(parentElement) + "/" + xpath;
-        parentElement = getParentNode(parentElement);
+    if ($0.nodeType === 1) {
+        data["short xpath"] = getXpath($0, false);
+        data["full xpath"] = getXpath($0, true);
+        data["top"] = getTop($0);
+        data["left"] = getLeft($0);
+        data["bottom"] = getBottom($0);
+        data["right"] = getRight($0);
+    } else {
+        data["error"] = "This is not an element node.";
     }
-    data["xpath"] = "//" + xpath;
-    data["top"] = getTop($0);
-    data["left"] = getLeft($0);
-    data["bottom"] = getBottom($0);
-    data["right"] = getRight($0);
     return data;
 };
-chrome.devtools.panels.elements.createSidebarPane("XPath Spy", function(sidebar) {
-    var onSelectionChanged = function() {
-        sidebar.setExpression("(" + getElementInfo.toString() + ")()", "Element");
-    };
-    onSelectionChanged();
-    chrome.devtools.panels.elements.onSelectionChanged.addListener(onSelectionChanged);
-});
+
+chrome.devtools.panels.elements.createSidebarPane("XPath Spy",
+        function(sidebar) {
+            var onSelectionChanged = function() {
+                sidebar.setExpression("(" + getElementInfo.toString() + ")()",
+                        "Element");
+            };
+            onSelectionChanged();
+            chrome.devtools.panels.elements.onSelectionChanged
+                    .addListener(onSelectionChanged);
+        });
