@@ -19,7 +19,8 @@ var getElementInfo = function selectedElement() {
         
         if (isFull) {
             while (previousSiblingElement != null) {
-                if (previousSiblingElement.tagName === e.tagName
+                if (previousSiblingElement.id === e.id
+                        && previousSiblingElement.tagName === e.tagName
                         && previousSiblingElement.name === e.name
                         && previousSiblingElement.className === e.className
                         && previousSiblingElement.type === e.type) {
@@ -28,7 +29,8 @@ var getElementInfo = function selectedElement() {
                 previousSiblingElement = previousSiblingElement.previousSibling;
             }
             while (nextSiblingElement != null) {
-                if (nextSiblingElement.tagName === e.tagName
+                if (nextSiblingElement.id === e.id
+                        && nextSiblingElement.tagName === e.tagName
                         && nextSiblingElement.name === e.name
                         && nextSiblingElement.className === e.className
                         && nextSiblingElement.type === e.type) {
