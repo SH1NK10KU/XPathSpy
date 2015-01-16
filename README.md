@@ -5,15 +5,15 @@ XPath Spy is a chrome extension to easily get the XPath of the selected element 
 
 ### How to use
 * Get the XPath of the selected element via the devtools (F12).<br />
-![github](https://github.com/ShinFK/XPathSpy/tree/master/screenshots/get_xpath.jpg "github")
+<img src="https://github.com/ShinFK/XPathSpy/tree/master/screenshots/get_xpath.jpg")></img><br />
 * Verify the XPath.<br />
 	* Input your XPath via shortcut (Ctrl+Shift+S)<br />
-	![github](https://github.com/ShinFK/XPathSpy/tree/master/screenshots/verify_xpath_shortcut.jpg "github")
-	* The result will be displayed in both nofification and console.<br />
-	![github](https://github.com/ShinFK/XPathSpy/tree/master/screenshots/verify_xpath_notification_and_console.jpg "github")
+	<img src="https://github.com/ShinFK/XPathSpy/tree/master/screenshots/verify_xpath_shortcut.jpg")></img>
+	* The result will display in both nofification and console.<br />
+	<img src="https://github.com/ShinFK/XPathSpy/tree/master/screenshots/verify_xpath_notification_and_console.jpg")></img>
 
 ### Author
 Shin Feng
 
 ### Contact me
-[EMAIL](shin.f.kan@gmail.com)
+[E-Mail](shin.f.kan@gmail.com)
