@@ -3,6 +3,6 @@
         "message": "XPath间谍"
     },
     "extensionDescription": {
-        "message": "在开发者工具中提供方便获取已选取页面元素的XPath。"
+        "message": "在开发者工具中提供方便获取已选取页面元素的XPath,以及验证XPath。"
     }
 }

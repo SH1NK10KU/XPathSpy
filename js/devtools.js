@@ -63,8 +63,8 @@ var getElementInfo = function selectedElement() {
         var sibling = getSibling(e, isFull);
         if (isFull) {
             var attrsArray = new Array();
-            var attrs = [ "@value=", "@type=", "@class=", "@name=", "@id=" ];
-            var values = [ e.value, e.type, e.className, e.name, e.id ];
+            var attrs = [ "@type=", "@class=", "@name=", "@id=" ];
+            var values = [ e.type, e.className, e.name, e.id ];
             for (var index = attrs.length - 1; index >= 0; index--) {
                 if (typeof values[index] !== "undefined"
                         && values[index] !== "") {
