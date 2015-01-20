@@ -21,7 +21,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
                     theResult = "There "
                             + (elementCount > 1 ? "are " + elementCount
                                     + " elements" : "is only one element")
-                            + " which XPath likes \'" + request.xpath
+                            + " which XPath like \'" + request.xpath
                             + "\' in this page."
                     console.log(theResult);
                 } else {
