@@ -3,6 +3,6 @@
         "message": "XPath Spy"
     },
     "extensionDescription": {
-        "message": "XPath Spy is a chrome extension to easily get the XPath of the selected element via devtools directly and verify the XPath."
+        "message": "XPath Spy is a chrome extension to easily get the XPath of the selected element via context menu or devtools directly and verify the XPath."
     }
 }
