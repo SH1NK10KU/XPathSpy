@@ -1,7 +1,7 @@
 XPathSpy
 ========
 
-XPath Spy is a chrome extension to easily get the XPath of the selected element via devtools directly and verify the XPath.
+XPath Spy is a chrome extension to easily get the XPath of the selected element via context menu or devtools directly and verify the XPath.
 
 ### How to use
 * Get the XPath via context menu.<br />
@@ -14,7 +14,7 @@ XPath Spy is a chrome extension to easily get the XPath of the selected element 
 * Verify the XPath.<br />
 	* Input your XPath via shortcut (Ctrl+Shift+S)<br />
 	<img src="https://github.com/ShinFK/XPathSpy/tree/master/screenshots/verify_xpath_shortcut_dialog.png")></img>
-	* The result will display in both nofification and console.<br />
+	* The result will display in both notification and console.<br />
 	<img src="https://github.com/ShinFK/XPathSpy/tree/master/screenshots/verify_xpath_notification_and_console.png")></img>
 
 
