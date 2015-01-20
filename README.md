@@ -5,9 +5,9 @@ XPath Spy is a chrome extension to easily get the XPath of the selected element 
 
 ### How to use
 * Get the XPath via context menu.<br />
-	* Right click and click on the menu, "Spy XPath".
+	* Right click and click on the menu, "Spy XPath".<br />
 	<img src="https://github.com/ShinFK/XPathSpy/tree/master/screenshots/get_xpath_via_contextmenu.png")></img><br />
-	* The result will display in the prompt dialog.
+	* The result will display in the prompt dialog.<br />
 	<img src="https://github.com/ShinFK/XPathSpy/tree/master/screenshots/get_xpath_via_contextmenu_prompt.png")></img><br />
 * Get the XPath of the selected element via the devtools (F12).<br />
 <img src="https://github.com/ShinFK/XPathSpy/tree/master/screenshots/get_xpath_via_devtools.png")></img><br />
