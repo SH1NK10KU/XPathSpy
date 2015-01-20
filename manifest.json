@@ -30,6 +30,6 @@
             "description": "XPath Spy shortcut"
         }
     },
-    "permissions": ["tabs", "<all_urls>", "gcm", "notifications"],
+    "permissions": ["tabs", "<all_urls>", "gcm", "notifications", "contextMenus"],
     "manifest_version": 2
 }
